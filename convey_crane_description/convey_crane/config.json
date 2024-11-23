@@ -1,0 +1,7 @@
+{
+    "documentId": "28dba602e0c97738499825fa",
+    "outputFormat": "urdf",
+    "packageName": "convey_crane_description/convey_crane",
+    "robotName": "convey_crane",
+    "assemblyName": "convey_crane_system"
+  }

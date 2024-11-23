@@ -1,0 +1,186 @@
+<robot name="convey_crane">
+<link name="support_plaform_1">
+<visual>
+<origin xyz="0.085000000000000019984 0.025000000000000022204 -0.019999999999999990008" rpy="0 -0 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/support_plaform_1.stl"/>
+</geometry>
+<material name="support_plaform_1_material">
+<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+</material>
+</visual>
+<collision>
+<origin xyz="0.085000000000000019984 0.025000000000000022204 -0.019999999999999990008" rpy="0 -0 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/support_plaform_1.stl"/>
+</geometry>
+</collision>
+<inertial>
+<origin xyz="0.085000000000000019984 0.0019366224157371973117 0.20527754982977566844" rpy="0 0 0"/>
+<mass value="8.3650792577619803581" />
+<inertia ixx="0.18809404056513884251" ixy="0"  ixz="0" iyy="0.19768960892502629445" iyz="0.0034874963072423744229" izz="0.014632587595117504606" />
+</inertial>
+</link>
+
+<link name="cart_pole_line">
+<visual>
+<origin xyz="0.0050000000000000009714 -0.049999999999999988898 0" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/cart_pole_line.stl"/>
+</geometry>
+<material name="cart_pole_line_material">
+<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+</material>
+</visual>
+<collision>
+<origin xyz="0.0050000000000000009714 -0.049999999999999988898 0" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/cart_pole_line.stl"/>
+</geometry>
+</collision>
+<inertial>
+<origin xyz="-0.99507213325206489429 -0.021216690244781032104 -3.5306212902930945573e-05" rpy="0 0 0"/>
+<mass value="17.129471613392958318" />
+<inertia ixx="0.010371517126750266768" ixy="-2.2571194222369972551e-05"  ixz="8.5176426230256071983e-06" iyy="5.7133527876254550648" iyz="-5.938288855520099704e-06" izz="5.7091229148612372413" />
+</inertial>
+</link>
+
+<link name="support_plaform_1_2">
+<visual>
+<origin xyz="0.0049999999999998934186 -0.48999999999999999112 6.9388939039072283776e-17" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/support_plaform_1.stl"/>
+</geometry>
+<material name="support_plaform_1_material">
+<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+</material>
+</visual>
+<collision>
+<origin xyz="0.0049999999999998934186 -0.48999999999999999112 6.9388939039072283776e-17" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/support_plaform_1.stl"/>
+</geometry>
+</collision>
+<inertial>
+<origin xyz="-0.018063377584262931691 -0.26472245017022433267 6.5441072379336884681e-17" rpy="0 0 0"/>
+<mass value="8.3650792577619803581" />
+<inertia ixx="0.19768960892502629445" ixy="0.0034874963072423744229"  ixz="0" iyy="0.014632587595117504606" iyz="0" izz="0.18809404056513884251" />
+</inertial>
+</link>
+
+<joint name="fastened 3" type="fixed">
+<origin xyz="-1.9900000000000002132 -1.1102230246251565404e-16 1.3877787807814456755e-17" rpy="3.141592653589793116 -0 3.141592653589793116" />
+<parent link="cart_pole_line" />
+<child link="support_plaform_1_2" />
+<axis xyz="0 0 1"/>
+<limit effort="1" velocity="20" />
+<joint_properties friction="0.0"/>
+</joint>
+
+<link name="cart_move">
+<visual>
+<origin xyz="0.090000000000000024425 -0.025000000000000022204 -0.075000000000000066613" rpy="-1.570796326794896558 -1.570796326794896336 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/cart_move.stl"/>
+</geometry>
+<material name="cart_move_material">
+<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+</material>
+</visual>
+<collision>
+<origin xyz="0.090000000000000024425 -0.025000000000000022204 -0.075000000000000066613" rpy="-1.570796326794896558 -1.570796326794896336 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/cart_move.stl"/>
+</geometry>
+</collision>
+<inertial>
+<origin xyz="0.040619485761392813694 0.03507424335133896981 -5.5511151231257827021e-17" rpy="0 0 0"/>
+<mass value="2.7582989593438584919" />
+<inertia ixx="0.0072884337806232426735" ixy="1.7214130923659983201e-05"  ixz="5.5457548773363819873e-21" iyy="0.007943139603199119228" iyz="9.1364122808394913014e-19" izz="0.0051071794741707502926" />
+</inertial>
+</link>
+
+<link name="cart_swinger">
+<visual>
+<origin xyz="1.1102230246251565404e-16 -0.47999999999999998224 -0.0050000000000000044409" rpy="-1.570796326794896558 -0 -4.8423381458879010319e-33" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/cart_swinger.stl"/>
+</geometry>
+<material name="cart_swinger_material">
+<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+</material>
+</visual>
+<collision>
+<origin xyz="1.1102230246251565404e-16 -0.47999999999999998224 -0.0050000000000000044409" rpy="-1.570796326794896558 -0 -4.8423381458879010319e-33" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/cart_swinger.stl"/>
+</geometry>
+</collision>
+<inertial>
+<origin xyz="8.9449481309083387936e-17 -0.23320688038281839338 0.0074999999999999893141" rpy="0 0 0"/>
+<mass value="0.96730709424135585817" />
+<inertia ixx="0.019645015474623172408" ixy="-9.4558020683389170413e-35"  ixz="6.5797313948525898238e-12" iyy="0.00011766776891047566519" iyz="-3.1861284322990905052e-44" izz="0.019666908757294859073" />
+</inertial>
+</link>
+
+<link name="mass_swing">
+<visual>
+<origin xyz="0.024999999999999994449 0 0" rpy="1.570796326794896558 1.570796326794896558 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/mass_swing.stl"/>
+</geometry>
+<material name="mass_swing_material">
+<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+</material>
+</visual>
+<collision>
+<origin xyz="0.024999999999999994449 0 0" rpy="1.570796326794896558 1.570796326794896558 0" />
+<geometry>
+<mesh filename="package://convey_crane_description/convey_crane/mass_swing.stl"/>
+</geometry>
+</collision>
+<inertial>
+<origin xyz="0.01249999999999999549 -0.024999999999999994449 -1.3629324809953193268e-17" rpy="0 0 0"/>
+<mass value="0.67500000000000004441" />
+<inertia ixx="0.0023906250000000003886" ixy="0"  ixz="0" iyy="0.0022851562500000002949" iyz="1.4636729328554310822e-19" izz="0.00017578124999999993928" />
+</inertial>
+</link>
+
+<joint name="fastened 1" type="fixed">
+<origin xyz="1.1102230246251565404e-16 -0.4749999999999999778 0.019999999999999990008" rpy="-3.141592653589793116 -1.570796326794896558 0" />
+<parent link="cart_swinger" />
+<child link="mass_swing" />
+<axis xyz="0 0 1"/>
+<limit effort="1" velocity="20" />
+<joint_properties friction="0.0"/>
+</joint>
+
+<joint name="continuous_revolute 1" type="continuous">
+<origin xyz="0.10468245836551856587 0.024999999999999744649 0" rpy="-0 1.570796326794896336 0" />
+<parent link="cart_move" />
+<child link="cart_swinger" />
+<axis xyz="0 0 1"/>
+<limit effort="1" velocity="20" />
+<joint_properties friction="0.0"/>
+</joint>
+
+<joint name="slider 1" type="prismatic">
+<origin xyz="-0.99499999999999999556 -0.024999999999999966693 -0.039999999999999980016" rpy="-0 -1.570796326794896558 0" />
+<parent link="cart_pole_line" />
+<child link="cart_move" />
+<axis xyz="0 0 1"/>
+<limit effort="1" velocity="20" lower="-0.80000000000000004441" upper="0.80000000000000004441"/>
+<joint_properties friction="0.0"/>
+</joint>
+
+<joint name="fastened 2" type="fixed">
+<origin xyz="0.084999999999999964473 0.020000000000000021233 0.46999999999999997335" rpy="1.570796326794896558 -0 1.570796326794896558" />
+<parent link="support_plaform_1" />
+<child link="cart_pole_line" />
+<axis xyz="0 0 1"/>
+<limit effort="1" velocity="20" />
+<joint_properties friction="0.0"/>
+</joint>
+
+
+</robot>
