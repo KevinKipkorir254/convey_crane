@@ -27,6 +27,7 @@ install(
   DIRECTORY
     rviz
     launch
+    config
     convey_crane
   DESTINATION
     share/${PROJECT_NAME}/

@@ -1,4 +1,9 @@
-<robot name="convey_crane">
+<?xml version="1.0"?>
+<robot name="convey_crane" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+<xacro:include filename="$(find convey_crane_description)/convey_crane/ros2_control.urdf.xacro"/> 
+
 <link name="support_plaform_1">
 <visual>
 <origin xyz="0.085000000000000019984 0.025000000000000022204 -0.019999999999999990008" rpy="0 -0 0" />
@@ -155,7 +160,7 @@
 <joint_properties friction="0.0"/>
 </joint>
 
-<joint name="continuous_revolute 1" type="continuous">
+<joint name="continuous_revolute_1" type="continuous">
 <origin xyz="0.10468245836551856587 0.024999999999999744649 0" rpy="-0 1.570796326794896336 0" />
 <parent link="cart_move" />
 <child link="cart_swinger" />
@@ -164,7 +169,7 @@
 <joint_properties friction="0.0"/>
 </joint>
 
-<joint name="slider 1" type="prismatic">
+<joint name="slider_1" type="prismatic">
 <origin xyz="-0.99499999999999999556 -0.024999999999999966693 -0.039999999999999980016" rpy="-0 -1.570796326794896558 0" />
 <parent link="cart_pole_line" />
 <child link="cart_move" />
