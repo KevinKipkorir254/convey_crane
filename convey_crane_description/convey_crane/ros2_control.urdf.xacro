@@ -18,8 +18,6 @@
   </joint>
 
   <joint name="continuous_revolute_1">
-     <!-- leaving it empty because I am that good-->
-     
     <state_interface name="position">
        <param name="initial_value">0.0</param>
        </state_interface>
