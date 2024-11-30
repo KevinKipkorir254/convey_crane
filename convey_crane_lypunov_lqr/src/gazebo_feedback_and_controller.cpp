@@ -28,6 +28,32 @@ class JointStateSubscriber : public rclcpp::Node
       subscription_ = this->create_subscription<sensor_msgs::msg::JointState>("joint_states", 10, std::bind(&JointStateSubscriber::topic_callback, this, _1));
       publisher_ = this->create_publisher<std_msgs::msg::Float64MultiArray>("effort_controller/commands", 10);
 
+      this->declare_parameter("K", rclcpp::PARAMETER_DOUBLE_ARRAY);
+      this->declare_parameter("ke", rclcpp::PARAMETER_DOUBLE);
+      this->declare_parameter("kx", rclcpp::PARAMETER_DOUBLE);
+      this->declare_parameter("yy", rclcpp::PARAMETER_DOUBLE);
+      this->declare_parameter("lqr_transition_angle", rclcpp::PARAMETER_DOUBLE);
+
+                        
+            try {
+                K_ = Eigen::Vector4d(this->get_parameter("K").as_double_array().data());
+                ke_ = this->get_parameter("ke").as_double();
+                kx_ = this->get_parameter("kx").as_double();
+                y_ = this->get_parameter("yy").as_double();
+                lqr_transition_angle_ = this->get_parameter("lqr_transition_angle").as_double();
+
+                
+            RCLCPP_WARN(this->get_logger(), "K: %.4f, %.4f, %.4f, %.4f", K_(0), K_(1), K_(2), K_(3));
+            RCLCPP_WARN(this->get_logger(), "ke: %.4f", ke_);
+            RCLCPP_WARN(this->get_logger(), "kv: %.4f", kx_);
+            RCLCPP_WARN(this->get_logger(), "kx: %.4f", y_);
+            RCLCPP_WARN(this->get_logger(), "lqr_transition_angle_: %.4f", lqr_transition_angle_);
+
+            } catch (const rclcpp::exceptions::ParameterUninitializedException & e) {
+                RCLCPP_ERROR_STREAM(this->get_logger(), "Required parameter not defined: " << e.what());
+                throw e;
+            }
+
     }
 
   private:
@@ -44,6 +70,8 @@ class JointStateSubscriber : public rclcpp::Node
             
             double swinger_position;
             double swinger_velocity;
+
+            double switching_range = lqr_transition_angle_;
 
 
         if (slider_it != msg.name.end())
@@ -78,8 +106,8 @@ class JointStateSubscriber : public rclcpp::Node
         if((slider_it != msg.name.end()) || (swinger_it != msg.name.end()))
         {
               // Define the range boundaries
-              double lower_limit = PI - 0.523599;
-              double upper_limit = PI + 0.523599;
+              double upper_limit = PI + switching_range;
+              double lower_limit = PI - switching_range;
 
                   // Normalize swinger_position to [0, 2*PI]
               double normalized_position = fmod(swinger_position, 2 * PI);
@@ -98,9 +126,9 @@ class JointStateSubscriber : public rclcpp::Node
             // Control parameters
             /*--------------------------------------------------------------------------------*/
             //THIS SHOULD BE ADDED TO A YAML FILE
-            double ke = 0.001;  //reduce to mae the thing more agreessive
-            double kx = 1000.0; //increase to make the thing more aggressive
-            double y = 1.0;     //increase to mae the thing more aggressive
+            double ke = ke_;  //reduce to mae the thing more agreessive
+            double kx = kx_; //increase to make the thing more aggressive
+            double y = y_;     //increase to mae the thing more aggressive
             /*-------------------------------------------------------------------------------*/
             
             double output = (-(1/ke))*(kx*slider_position + y*slider_velocity);
@@ -111,7 +139,7 @@ class JointStateSubscriber : public rclcpp::Node
 
                     else 
                     {
-                    double gains_[4] = { 4.4721, 15.2859, 3.2368, 0.5482};
+                    double gains_[4] = { K_(0), K_(1), K_(2), K_(3)};
 
                     double from_output = (gains_[0]*swinger_position);
                     double first = (gains_[1]*swinger_velocity) + (gains_[2]*slider_position) +(gains_[3]*slider_velocity);
@@ -129,6 +157,11 @@ class JointStateSubscriber : public rclcpp::Node
     }
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr subscription_;
     rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr publisher_; // effort controller publisher
+    Eigen::Vector4d K_;
+    double ke_;  //reduce to mae the thing more agreessive
+    double kx_; //increase to make the thing more aggressive
+    double y_;     //increase to mae the thing more aggressive
+    double lqr_transition_angle_;
 };
 
 int main(int argc, char * argv[])
