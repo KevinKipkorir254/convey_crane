@@ -1,4 +1,4 @@
-![CART POLE GAZEBO IMAGE](/extra_resource/Screenshot%202024-11-27%20173413.png)
+![CONVEY CRANE GAZEBO IMAGE](/extra_resources/Screenshot%202024-11-28%20114620.png)
 
 ## HOW TO RUN THE PROJECT.
 1. Go to the workspace and source the project;
