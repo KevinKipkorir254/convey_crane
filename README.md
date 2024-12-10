@@ -25,15 +25,18 @@ The symlink install allows for changing the gain parameters in the yaml file and
 ```yaml
 /**:
   ros__parameters:
-    K: [ -141.4214, -77.6558, -238.7684, -36.5906]
+    K: [ -1.000000, -3.388414, -94.580966, -12.299571]
 
-    ke: 0.0001  #<- <-
-    kx: 1000.0  #-> ->
-    yy: 1.0     #-> ->
+    ke: 0.1
+    kv: 1.0
+    kx: 10.0
+    kdelta: 1.0
 
     # 0.0 angle - upward position. When absolute angle is less than this threshold
     # transition from swing up to LQR
-    lqr_transition_angle: 0.523599
+    lqr_transition_angle: 30.0
+    initial_force: 0.5
+    rviz_test: false
 ```
 
 4. I can also have the following plotter:
@@ -51,6 +54,10 @@ sudo apt-get install gazebo
 sudo apt install ros-humble-gazebo-ros-pkgs
 sudo apt install ros-humble-gazebo-ros2-control
 ```
+Here are is a command you will need
 
+```bash
+export LIBGL_ALWAYS_SOFTWARE=1
+```
 
 TODO: I might add an initializer where I have a force to one direction at first to have a large initial oscillation before starting the project or I might just start at an angle to save time.
