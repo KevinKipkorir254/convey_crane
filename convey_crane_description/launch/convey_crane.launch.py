@@ -4,12 +4,12 @@ from launch import LaunchDescription
 from ament_index_python.packages import get_package_share_directory
 
 package_name = "convey_crane_description"
-urdf_file_name = "robot.urdf"
+urdf_file_name = "robot.urdf.xacro"
 
 def generate_launch_description():
 
     urdf_file = os.path.join(get_package_share_directory(package_name), "convey_crane", urdf_file_name)
-    rviz_config = os.path.join(get_package_share_directory(package_name), "rviz", "cart_pole.rviz")
+    rviz_config = os.path.join(get_package_share_directory(package_name), "rviz", "convey_crane.rviz")
 
     with open(urdf_file, 'r') as infp:
         robot_descr = infp.read()

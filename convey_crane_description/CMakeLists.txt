@@ -29,6 +29,7 @@ install(
     launch
     config
     convey_crane
+    worlds
   DESTINATION
     share/${PROJECT_NAME}/
 )
